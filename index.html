@@ -1,11 +1,33 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="utf-8">
 	<title>Library</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-	
+	<div id="container"></div>
+	<div>
+		<button id="dispForm">Add Book</button>
+	</div>
+	<div id="form">
+		<form>
+			<h4>Add book details below</h4>
+			<label for="title">Title:
+				<input type="text" name="title">
+			</label><br><br>
+			<label for="author">Author:
+				<input type="text" name="author">
+			</label><br><br>
+			<label for="page">Pages:
+				<input type="number" name="page">
+			</label><br><br>
+			<label for="read">Did you read?
+				<input type="checkbox" name="read">
+			</label><br><br>
+			<button type="submit">Submit</button>
+		</form>
+	</div>
 	<script type="text/javascript" src="script.js"></script>
 </body>
 </html>
