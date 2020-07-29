@@ -21,25 +21,42 @@ addBookToLibrary(b1);
 addBookToLibrary(b2);
 
 function render() {
-	myLibrary.forEach((book) => {
+	container.innerHTML = '';
+	myLibrary.forEach((book, index) => {
 
-		let div   = document.createElement('div');
-		let h3    = document.createElement('h3');
-		let h1    = document.createElement('h1');
-		let page  = document.createElement('p');
+		let bookCard = document.createElement('div');
+		let h3     = document.createElement('h3');
+		let h1     = document.createElement('h1');
+		let page   = document.createElement('p');
 		let status = document.createElement('p');  
+		let del    = document.createElement('button');
+		let hr     = document.createElement('hr');
 
-		h3.textContent = book.author,
-		h1.textContent = book.title,
-		page.textContent = book.number_of_pages,
+		h3.textContent = book.author
+		h1.textContent = book.title
+		page.textContent = book.number_of_pages
 		status.textContent  = book.reading_status
+		del.textContent = "Delete"
 
-		div.appendChild(h1);
- 		div.appendChild(h3);		
-		div.appendChild(page);
-		div.appendChild(status);
-		container.appendChild(div);	
+		del.setAttribute('data-key',index);
+		del.classList.add('deleteBook');
+
+		bookCard.appendChild(h1);
+ 		bookCard.appendChild(h3);		
+		bookCard.appendChild(page);
+		bookCard.appendChild(status);
+		bookCard.appendChild(del);
+		bookCard.appendChild(hr);
+		container.appendChild(bookCard);	
 	})
+
+	var delBook = document.querySelectorAll('.deleteBook');
+	delBook.forEach((book) => {
+		book.addEventListener('click', (e) => {
+			myLibrary.splice(e.target.dataset.key,1);
+			render();
+	})
+})
 }
 
 dispForm.addEventListener('click', (e) => {
