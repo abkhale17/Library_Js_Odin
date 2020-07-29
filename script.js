@@ -10,6 +10,10 @@ function Book(author, title , number_of_pages, reading_status) {
 	this.reading_status = reading_status	
 }
 
+Book.prototype.toggleReadStatus = function() {
+	this.reading_status = !this.reading_status;
+}
+
 function addBookToLibrary(book) {
 	myLibrary.push(book);
 }
@@ -30,6 +34,7 @@ function render() {
 		let page   = document.createElement('p');
 		let status = document.createElement('p');  
 		let del    = document.createElement('button');
+		let status_toggler = document.createElement('button');
 		let hr     = document.createElement('hr');
 
 		h3.textContent = book.author
@@ -37,15 +42,20 @@ function render() {
 		page.textContent = book.number_of_pages
 		status.textContent  = book.reading_status
 		del.textContent = "Delete"
+		status_toggler.textContent = book.reading_status ? "Didn\'t read" : "Reading Done";
 
 		del.setAttribute('data-key',index);
 		del.classList.add('deleteBook');
+
+		status_toggler.setAttribute('data-key',index);
+		status_toggler.classList.add('statusToggle');
 
 		bookCard.appendChild(h1);
  		bookCard.appendChild(h3);		
 		bookCard.appendChild(page);
 		bookCard.appendChild(status);
 		bookCard.appendChild(del);
+		bookCard.appendChild(status_toggler);
 		bookCard.appendChild(hr);
 		container.appendChild(bookCard);	
 	})
@@ -55,8 +65,16 @@ function render() {
 		book.addEventListener('click', (e) => {
 			myLibrary.splice(e.target.dataset.key,1);
 			render();
+		})
 	})
-})
+
+	var toggleRead = document.querySelectorAll('.statusToggle');
+	toggleRead.forEach((book) => {
+		book.addEventListener('click', (e) => {
+			myLibrary[e.target.dataset.key].toggleReadStatus();
+			render();
+		})
+	})
 }
 
 dispForm.addEventListener('click', (e) => {
