@@ -2,6 +2,8 @@ let myLibrary = [];
 var container = document.getElementById('container');
 var dispForm  = document.getElementById('dispForm');
 var form  = document.getElementById('form');
+var addBook  = document.getElementById('addBook');
+
 
 function Book(author, title , number_of_pages, reading_status) {
 	this.author = author,
@@ -76,6 +78,23 @@ function render() {
 		})
 	})
 }
+
+function clearFields() {
+	document.getElementById('title').value = "";
+	document.getElementById('author').value = "";
+	document.getElementById('page').value = "";
+	document.getElementById('read').checked =  false;
+}
+
+addBook.addEventListener('click', (e) => {
+	var title = document.getElementById('title').value;
+	var author= document.getElementById('author').value;
+	var no_of_pages = document.getElementById('page').value;
+	var reading_status = document.getElementById('read').checked ? true : false;
+	addBookToLibrary(new Book(title, author, no_of_pages, reading_status));
+	clearFields();
+	render();
+})
 
 dispForm.addEventListener('click', (e) => {
 	var disp = form.style.display;
