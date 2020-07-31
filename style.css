@@ -1,3 +1,156 @@
+body {
+	font-family: sans-serif;
+}
+
+h1 {
+	text-align: center;
+	color: #979b0ce0;
+}
+
+h4 {
+	color: #808080ad
+}
+
+.head {
+    color: blue;
+    margin-top: 3%;
+    margin-bottom: 1%;
+}
+
+.head h1 {
+    color: darkorange;
+    font-size: 4em;
+    font-style: inherit;
+    font-family: ubuntu;
+}
+
+.container-fluid {
+	margin: auto;
+	padding-left: 0px;
+	padding-right: 0px;
+	width:80%;
+}
+
+#container {
+	margin-top: 3%
+}
+
+.card-body {
+	position: relative;
+	background-color: #e8e8e866;
+	box-shadow: 0 6px 10px rgba(0,0,0,0.16), 0 4px 4px rgba(0,0,0,0.24);
+  	transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
+.card-body:hover {
+  box-shadow: 1px 14px 28px rgba(0,0,0,0.25), 1px 10px 10px rgba(0,0,0,0.22);
+}
+
+.card {
+	margin-bottom: 2.25rem
+}
+
+p.pages {
+	float: right;
+	margin-right: 1.25rem;
+}
+
+p.read {
+	float: left;	
+}
+
+p.read, p.pages {
+	color: maroon;
+	font-size: 21px;
+}
+
+strong {
+    color: #991e99b3;
+}
+
+/*
+	--------------Buttons--------------
+*/
+.divBtns {
+	clear: both;
+}
+.divBtns button {
+    width: 49%;
+}
+
+.divBtns button:hover, #dispForm:hover, #addBook:hover, #clearStorage:hover {
+    transition: all 0.3s;
+    box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.3);
+}
+
+.btn.statusToggle.btn-primary, .btn#addBook.btn-primary {
+    margin-right: 1%;
+}
+
+#dispForm , #clearStorage{
+    width: 100%;
+    margin: 1% 0px;
+}
+
+#clearStorage {
+	margin-bottom: 2.5rem;
+}
+
+/*
+	--------------FORM--------------
+*/
+
 #form {
 	display: none;
+	margin: 1.5% 0% 2.5rem 0%;
+	font-weight: 500;
+	font-size: 17px;
+	transition: all 4s;
+	color: #7d1414;
+}
+
+input[type=text], input[type=number] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  color: #603702;
+}
+
+input:focus {
+  border-color: teal;
+}
+
+
+/*
+	--------------MEDIA QUERIES--------------
+*/
+
+
+@media all and (max-width: 680px){
+	.container-fluid {
+		margin: auto;
+		padding-left: 0px;
+		padding-right: 0px;
+		width:100%;
+	}
+
+	#form {
+		margin-left: 1.25rem;
+		margin-right: 1.25rem;
+	}
+
+	p.pages, p.read {
+		float: none;
+		text-align: center;
+	}
+
+	.divBtns button {
+    	width: 100%;
+    	margin-bottom: 0.5rem
+	}
+
 }

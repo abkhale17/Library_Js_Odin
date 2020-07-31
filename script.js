@@ -3,6 +3,8 @@ var container = document.getElementById('container');
 var dispForm  = document.getElementById('dispForm');
 var form  = document.getElementById('form');
 var addBook  = document.getElementById('addBook');
+var clearField  = document.getElementById('clearField');
+
 
 
 function Book(author, title , number_of_pages, reading_status) {
@@ -108,7 +110,13 @@ function getLocalStorage() {
 	    render();
 	} else {
 		var b1 = new Book("SR Arthur Conan Doyle", "The Sign of four", 93, true);
+		var b2 = new Book("Stephen Hawking", "A Brief History Of Time", 197, true);
+		var b3 = new Book("Brian Greene", "The Elegant Universe", 821, false);
+		var b4 = new Book("H.C. Verma ", "Concepts of Physics", 273, true);
 		myLibrary.push(b1);
+		myLibrary.push(b2);
+		myLibrary.push(b3);
+		myLibrary.push(b4);
 		render();
 		updateLocalStorage();
 	}
@@ -145,6 +153,10 @@ dispForm.addEventListener('click', (e) => {
 		form.style.display = 'block';
 		dispForm.textContent = "Hide Form";
 	}
+})
+
+clearField.addEventListener('click', (e) => {
+	clearFields();
 })
 
 var clearStorage  = document.getElementById('clearStorage');

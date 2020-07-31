@@ -11,6 +11,10 @@
 </head>
 <body>
 	<div class="container-fluid">
+
+		<div class="head">
+			<h1>CENTRAL LIBRARY</h1>
+		</div>
 		<div>
 			<button id="dispForm" class="btn btn-success addBookBtn">Add Book</button>
 		</div>
@@ -28,11 +32,15 @@
 				<label for="read">Did you read?
 					<input type="checkbox" name="read" id="read">
 				</label><br><br>
-				<button type="button" id="addBook" class="btn btn-primary">Submit</button>
+				<div class="divBtns">
+					<button type="button" id="addBook" class="btn btn-primary">Submit</button>
+					<button type="button" id="clearField" class="btn btn-danger">Clear Fields</button>
+				</div>
+				
 			</form>
 		</div>
 		<div id="container"></div>
-		<button id="clearStorage" class="btn delBtn">Clear Local Storage</button>
+		<button id="clearStorage" class="btn btn-danger">Clear Local DATA</button>
 		
 		
 	</div>
