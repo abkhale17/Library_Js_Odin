@@ -1,4 +1,4 @@
-let myLibrary = [];
+let myLibrary = 	[]
 var container = document.getElementById('container');
 var dispForm  = document.getElementById('dispForm');
 var form  = document.getElementById('form');
@@ -12,60 +12,78 @@ function Book(author, title , number_of_pages, reading_status) {
 	this.reading_status = reading_status	
 }
 
-Book.prototype.toggleReadStatus = function() {
-	this.reading_status = !this.reading_status;
+// Book.prototype.toggleReadStatus = function() {
+// 	this.reading_status = !this.reading_status;
+// }
+function toggleReadStatus(obj) {
+	obj.reading_status = !obj.reading_status;
 }
 
-function addBookToLibrary(book) {
-	myLibrary.push(book);
+function addBookToLibrary(newBook) {
+	myLibrary.push(newBook);
 }
-
-var b1 = new Book('Sir Arthur Conan Doyle','The Sign of Four', 292, true);
-var b2 = new Book('Paulo Koylo','The Akchemist', 132, false);
-
-addBookToLibrary(b1);
-addBookToLibrary(b2);
 
 function render() {
 	container.innerHTML = '';
 	myLibrary.forEach((book, index) => {
 
 		let bookCard = document.createElement('div');
-		let h3     = document.createElement('h3');
+		let bookCardBody = document.createElement('div');
+		let h4     = document.createElement('h4');
 		let h1     = document.createElement('h1');
+		let br     = document.createElement('br');
 		let page   = document.createElement('p');
-		let status = document.createElement('p');  
+		let status = document.createElement('p'); 
+		let btnDiv = document.createElement('div'); 
 		let del    = document.createElement('button');
-		let status_toggler = document.createElement('button');
-		let hr     = document.createElement('hr');
+		let authorSpan   = document.createElement('strong');
 
-		h3.textContent = book.author
+		let status_toggler = document.createElement('button');
+		bookCard.classList.add('card');
+		bookCardBody.classList.add('card-body');
+
+		authorSpan.textContent = book.author
+		h4.textContent = `Written By `
 		h1.textContent = book.title
-		page.textContent = book.number_of_pages
-		status.textContent  = book.reading_status
+		page.textContent = `Number of pages: ${book.number_of_pages}`
+		status.textContent  = book.reading_status ? "Reading is Done!" : "Reading Not Completed!";
 		del.textContent = "Delete"
 		status_toggler.textContent = book.reading_status ? "Didn\'t read" : "Reading Done";
 
+		btnDiv.classList.add("divBtns");
+
 		del.setAttribute('data-key',index);
+		del.classList.add('btn');
 		del.classList.add('deleteBook');
+		del.classList.add('btn-danger');
 
 		status_toggler.setAttribute('data-key',index);
+		status_toggler.classList.add('btn');
 		status_toggler.classList.add('statusToggle');
+		status_toggler.classList.add('btn-primary');
 
-		bookCard.appendChild(h1);
- 		bookCard.appendChild(h3);		
-		bookCard.appendChild(page);
-		bookCard.appendChild(status);
-		bookCard.appendChild(del);
-		bookCard.appendChild(status_toggler);
-		bookCard.appendChild(hr);
-		container.appendChild(bookCard);	
+		page.classList.add("pages");
+		status.classList.add('read')
+
+		bookCardBody.appendChild(h1);
+		h4.appendChild(authorSpan)
+ 		bookCardBody.appendChild(h4);
+ 		bookCardBody.appendChild(br);
+ 		bookCardBody.appendChild(status);		
+		bookCardBody.appendChild(page);
+		
+		btnDiv.appendChild(status_toggler);
+		btnDiv.appendChild(del);
+		bookCardBody.appendChild(btnDiv)
+		bookCard.appendChild(bookCardBody);
+		container.appendChild(bookCard);
 	})
 
 	var delBook = document.querySelectorAll('.deleteBook');
 	delBook.forEach((book) => {
 		book.addEventListener('click', (e) => {
 			myLibrary.splice(e.target.dataset.key,1);
+			updateLocalStorage();
 			render();
 		})
 	})
@@ -73,10 +91,31 @@ function render() {
 	var toggleRead = document.querySelectorAll('.statusToggle');
 	toggleRead.forEach((book) => {
 		book.addEventListener('click', (e) => {
-			myLibrary[e.target.dataset.key].toggleReadStatus();
+			toggleReadStatus(myLibrary[e.target.dataset.key]);
+			updateLocalStorage();
 			render();
 		})
 	})
+}
+
+function updateLocalStorage() {
+	localStorage.setItem('library', JSON.stringify(myLibrary));
+}
+
+function getLocalStorage() {
+	if(localStorage.getItem('library')){
+	    myLibrary = JSON.parse(localStorage.getItem("library"));
+	    render();
+	} else {
+		var b1 = new Book("SR Arthur Conan Doyle", "The Sign of four", 93, true);
+		myLibrary.push(b1);
+		render();
+		updateLocalStorage();
+	}
+}
+
+function clearLocalStorage(){
+	localStorage.clear();
 }
 
 function clearFields() {
@@ -93,6 +132,7 @@ addBook.addEventListener('click', (e) => {
 	var reading_status = document.getElementById('read').checked ? true : false;
 	addBookToLibrary(new Book(title, author, no_of_pages, reading_status));
 	clearFields();
+	updateLocalStorage();
 	render();
 })
 
@@ -107,4 +147,10 @@ dispForm.addEventListener('click', (e) => {
 	}
 })
 
-render();
+var clearStorage  = document.getElementById('clearStorage');
+clearStorage.addEventListener('click', (e) => {
+	clearLocalStorage();
+})
+
+getLocalStorage();
+
