@@ -17,6 +17,7 @@ function Book(author, title , number_of_pages, reading_status) {
 // Book.prototype.toggleReadStatus = function() {
 // 	this.reading_status = !this.reading_status;
 // }
+
 function toggleReadStatus(obj) {
 	obj.reading_status = !obj.reading_status;
 }
