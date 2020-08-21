@@ -1,5 +1,7 @@
 # PROJECT: LIBRARY
 
+**See [Library](https://abkhale17.github.io/Library_Js_Odin/) Online**
+
 > From [The Odin Project](https://www.theodinproject.com/courses/javascript/lessons/library) curriculum.
 
 ### Learning Outcomes
